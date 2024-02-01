@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Need to run in bash to obtain default key bindings
+. ~/.bash_profile
 
 tmux -f /dev/null -L temp start-server \; show-options -g prefix| \
-  sed -r -e "s/(.*)/set-option -g \1/g" > ~/.tmux1.reset.conf
+  sed -r -e "s/(.*)/set-option -g \1/g" > ~/.tmux.reset.conf
 
 ## == The following code is to get the notes for default tmux key bindings
 echo pkey=\(\) > ~/.tmux_keynotes
@@ -36,12 +36,12 @@ for line in $(cat ~/.tmux_default_keymap); do
     done
 
     if [[ $idx < 0 ]]; then
-      echo $line >> ~/.tmux1.reset.conf
+      echo $line >> ~/.tmux.reset.conf
     else
-      echo ${line/-T prefix/-N \"${pnote[$idx]}\" -T prefix} >> ~/.tmux1.reset.conf
+      echo ${line/-T prefix/-N \"${pnote[$idx]}\" -T prefix} >> ~/.tmux.reset.conf
     fi
   else
-    echo $line >> ~/.tmux1.reset.conf
+    echo $line >> ~/.tmux.reset.conf
   fi
 done
 
