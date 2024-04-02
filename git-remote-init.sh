@@ -9,18 +9,18 @@ gitRemotes=$gitTop/.gitremotes
 
 
 while read remote; do
-    arg=($( echo $remote | cut -w -f 1-3 ))
-    if [[ $arg[3] == "(fetch)" ]]; then
-	git remote set-url $arg[1] $arg[2]
+    arg=($(echo $remote | awk '{print $1"\n"$2"\n"$3}'))
+    if [[ "${arg[2]}" == "(fetch)" ]]; then
+	git remote set-url ${arg[0]} ${arg[1]}
     fi
 done < $gitRemotes
 
 while read remote; do
-    arg=($( echo $remote | cut -w -f 1-3 ))
-    if [[ $arg[3] == "(push)" ]]; then
-	fetchurl=$(git remote get-url $arg[1])
-	if [[ $fetchurl != $arg[2] ]]; then
-	    git remote set-url --push $arg[1] $arg[2]
+    arg=($(echo $remote | awk '{print $1"\n"$2"\n"$3}'))
+    if [[ "${arg[2]}" == "(push)" ]]; then
+	fetchurl=$(git remote get-url ${arg[0]})
+	if [[ $fetchurl != ${arg[1]} ]]; then
+	    git remote set-url --push ${arg[0]} ${arg[1]}
 	fi
     fi
 done < $gitRemotes
