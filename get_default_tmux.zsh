@@ -12,7 +12,7 @@ echo pkey=\(\) >> ~/.tmux_zsh_keynotes
 tmux -f /dev/null -L temp start-server \; list-keys > ~/.tmux_zsh_default_keymap
 
 tmux -f /dev/null -L temp start-server \; list-keys -N | \
-  gsed -r \
+  sed -r \
   -e "s/[^ \/\=\?\:\.\,\&\!\$a-zA-Z0-9\-]/\\\\&/g" \
   -e "s/^\S+\s+(\S+)\s+(.*)$/pkeynotes[\"\1\"]=\"\2\"/g" >> ~/.tmux_zsh_keynotes
 

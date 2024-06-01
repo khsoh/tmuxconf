@@ -12,7 +12,7 @@ echo pnote=\(\) >> ~/.tmux_keynotes
 tmux -f /dev/null -L temp start-server \; list-keys > ~/.tmux_default_keymap
 
 tmux -f /dev/null -L temp start-server \; list-keys -N | \
-  gsed -r \
+  sed -r \
   -e "s/[^ a-zA-Z0-9\-]/\\\\&/g" \
   -e "s/^\S+\s+(\S+)\s+(.*)$/pkey\+\=(\1)\npnote+=(\"\2\")/g" >> ~/.tmux_keynotes
 
