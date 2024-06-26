@@ -6,7 +6,7 @@ start_terminal_and_run_tmux() {
 		if not (exists window 1) then reopen
 		activate
 		set winID to id of window 1
-		do script "tmux new-session -A" in window id winID
+		do script "tmux" in window id winID
 	end tell
 	EOF
 }
