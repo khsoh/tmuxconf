@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
 start_terminal_and_run_tmux() {
-	osascript <<-EOF
+	osascript >/dev/null 2>&1 <<-EOF
 	tell application "Terminal"
 		if not (exists window 1) then reopen
 		activate
 		set winID to id of window 1
-		do script "declare -f tmux >/dev/null && tmux" in window id winID
+		do script "tmux" in window id winID
 	end tell
+	return
 	EOF
 }
 
